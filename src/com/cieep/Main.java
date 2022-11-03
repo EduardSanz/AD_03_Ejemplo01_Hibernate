@@ -1,6 +1,8 @@
 package com.cieep;
 
 import com.cieep.modelos.Alumno;
+import com.cieep.modelos.Curso;
+import com.cieep.modelos.Equipo;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -8,7 +10,15 @@ import org.hibernate.cfg.Configuration;
 public class Main {
     public static void main(String[] args) {
 
-        Alumno alumno = new Alumno("Edu", "Sanz", "12345678Z");
+        Alumno alumno = new Alumno("Yeffry", "Pastrana", "12345678Z");
+        Curso curso = new Curso("DAM", "POR CULEROS", 'C');
+        Equipo equipo = new Equipo("Apple", "iMac 21");
+
+        alumno.setEquipo(equipo);
+        alumno.setCurso(curso);
+        curso.getAlumnos().add(alumno);
+        equipo.setAlumno(alumno);
+
         // CREA LA VARIABLE QUE PUEDE CONECTAR
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
         // LA VARIBLE DE LA CONEXiÓN
@@ -17,22 +27,23 @@ public class Main {
 
         // CREATE
         session.persist(alumno);
+        session.persist(curso);
+        session.persist(equipo);
 
         session.getTransaction().commit();
 
-        session.beginTransaction();
-        // READ
-        Alumno a = session.get(Alumno.class, 2);
-        System.out.println(a.toString());
+//        // READ
+//        Alumno a = session.get(Alumno.class, 2);
+//        System.out.println(a.toString());
+//
+//        // UPDATE
+//        a.setName("Eduard");
+//        session.merge(a);
+//
+//        // DELETE
+//       // session.remove(a);
 
-        // UPDATE
-        a.setName("Eduard");
-        session.merge(a);
 
-        // DELETE
-       // session.remove(a);
-
-        session.getTransaction().commit();
         session.close();
     }
 }

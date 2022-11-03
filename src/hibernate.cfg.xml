@@ -12,7 +12,9 @@
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="show_sql">true</property>
 
-<!--        <mapping resource="com/cieep/modelos/mapping/alumno.hbm.xml" />-->
-        <mapping class="com.cieep.modelos.Alumno" />
+        <mapping resource="com/cieep/modelos/mapping/escuela.hbm.xml" />
+<!--        <mapping class="com.cieep.modelos.Alumno" />-->
+<!--        <mapping class="com.cieep.modelos.Equipo" />-->
+<!--        <mapping class="com.cieep.modelos.Curso" />-->
     </session-factory>
 </hibernate-configuration>

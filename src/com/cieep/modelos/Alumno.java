@@ -1,9 +1,6 @@
 package com.cieep.modelos;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 
@@ -12,6 +9,7 @@ import java.io.Serializable;
 public class Alumno implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name="nombre")
     private String name;
@@ -19,6 +17,14 @@ public class Alumno implements Serializable {
     private String apellidos;
     @Column
     private String dni;
+
+    @ManyToOne
+    @JoinColumn(name = "id_curso")
+    private Curso curso;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_equipo")
+    private Equipo equipo;
 
     public Alumno() {
     }
@@ -69,5 +75,21 @@ public class Alumno implements Serializable {
                 ", apellidos='" + apellidos + '\'' +
                 ", dni='" + dni + '\'' +
                 '}';
+    }
+
+    public Equipo getEquipo() {
+        return equipo;
+    }
+
+    public void setEquipo(Equipo equipo) {
+        this.equipo = equipo;
+    }
+
+    public Curso getCurso() {
+        return curso;
+    }
+
+    public void setCurso(Curso curso) {
+        this.curso = curso;
     }
 }

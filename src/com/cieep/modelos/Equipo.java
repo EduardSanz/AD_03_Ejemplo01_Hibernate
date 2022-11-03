@@ -1,12 +1,24 @@
 package com.cieep.modelos;
 
+import jakarta.persistence.*;
 import java.io.Serializable;
 
+@Entity
+@Table(name = "equipos")
 public class Equipo implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column
     private String marca;
+    @Column
     private String modelo;
+
+    @OneToOne(mappedBy = "equipo", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Alumno alumno;
+
+
 
     public Equipo() {
     }
@@ -47,5 +59,13 @@ public class Equipo implements Serializable {
                 ", marca='" + marca + '\'' +
                 ", modelo='" + modelo + '\'' +
                 '}';
+    }
+
+    public Alumno getAlumno() {
+        return alumno;
+    }
+
+    public void setAlumno(Alumno alumno) {
+        this.alumno = alumno;
     }
 }
