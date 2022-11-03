@@ -10,7 +10,7 @@
         <property name="dni" column="dni" type="java.lang.String"/>
 
         <!-- RELACIONES -->
-        <one-to-one name="equipo" cascade="all" />
+        <one-to-one name="equipo" cascade="all" foreign-key="id_equipo" />
         <many-to-one name="curso">
             <column name="id_curso" />
         </many-to-one>
@@ -25,9 +25,7 @@
             <key>
                 <column name="id_curso" />
             </key>
-            <list-index >
-                <column name="idx"/>
-            </list-index>
+            <list-index/>
             <one-to-many class="com.cieep.modelos.Alumno" />
         </list>
     </class>

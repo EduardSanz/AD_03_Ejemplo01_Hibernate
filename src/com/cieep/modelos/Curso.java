@@ -22,7 +22,6 @@ public class Curso implements Serializable {
     private char grupo;
 
     @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, orphanRemoval = true)
-    @IndexColumn(name = "idx")
     private List<Alumno> alumnos;
 
     public Curso() {

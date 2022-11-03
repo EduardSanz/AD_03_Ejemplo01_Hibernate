@@ -26,9 +26,10 @@ public class Main {
         session.beginTransaction();
 
         // CREATE
-        session.persist(alumno);
+
         session.persist(curso);
         session.persist(equipo);
+        
 
         session.getTransaction().commit();
 
